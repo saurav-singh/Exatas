@@ -98,3 +98,15 @@ def parsePair(pair):
     title = pair[0][1:]
     source = pair[1][:-1]
     return title, source
+
+"""
+# solution method 3
+#     same as previous expect that when an average similarity is computed,
+#     we make it a weighted average and make the weight of the lower value
+#     higher than the higher values
+
+#     the sum of the weights has to be 1. so we divide the weight(1) by the
+#     number of occurrences in a geometric progression so that the percent change
+#     from the lowest value to the second lowest is the same change as from
+#     the second to the third and so on and their sum is 1.
+"""

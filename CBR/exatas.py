@@ -55,12 +55,13 @@ if __name__ == "__main__":
 
     # Retrieve top 50 titles
     titles = sorted(PAIRCOUNT.items(), key=lambda x: x[1], reverse=True)
-    titles = titles[0:50]
     titles = list(map(lambda x: x[0].split(" | ")[0][1:], titles))
+    titles = list(dict.fromkeys(titles))
+    titles = titles[0:50]
 
     # Run solution for 50 title in all stratified dataset
     for title in titles:
-        for data in df[0:1]:
+        for data in df:
 
             pairCount, pairScores, pairAverage = formPairs(data)
 
@@ -82,24 +83,7 @@ if __name__ == "__main__":
             src3 = src3.replace(",", " ")
             row = title + "," + src1 + "," + src2 + "," + src3 + "\n"
 
-            with open("SOLUTION.csv", "a+") as F:
+            # Write to csv file
+            csvFile = "SOLUTION/0-" + str(len(data)) + ".csv"
+            with open(csvFile, "a+") as F:
                 F.write(row)
-
-
-"""
-
-# solution method 3
-#     same as previous expect that when an average similarity is computed,
-#     we make it a weighted average and make the weight of the lower value
-#     higher than the higher values
-
-#     the sum of the weights has to be 1. so we divide the weight(1) by the
-#     number of occurrences in a geometric progression so that the percent change
-#     from the lowest value to the second lowest is the same change as from
-#     the second to the third and so on and their sum is 1.
-
-# selected_case = model.predict(newquery, 1)
-# print('\n\nselected_case', selected_case)
-
-# query_solution = steps(selected_case)
-"""
