@@ -65,6 +65,13 @@ if __name__ == "__main__":
 
             pairCount, pairScores, pairAverage = formPairs(data)
 
+            # Solution 0
+            solution0 = solution_0(title, pairCount, pairAverage)
+            try:
+                t, src0 = parsePair(solution0)
+            except:
+                src0 = solution0
+
             # Solution 1
             solution1 = solution_1(title, pairCount, pairAverage)
             t, src1 = parsePair(solution1)
@@ -77,11 +84,17 @@ if __name__ == "__main__":
             solution3 = solution_3(title, pairScores)
             t, src3 = parsePair(solution3)
 
+            solution4 = solution_4(title, pairScores)
+            t, src4 = parsePair(solution4)
+
             # Store solution in CSV file
+            src0 = src0.replace(",", " ")
             src1 = src1.replace(",", " ")
             src2 = src2.replace(",", " ")
             src3 = src3.replace(",", " ")
-            row = title + "," + src1 + "," + src2 + "," + src3 + "\n"
+            src4 = src4.replace(",", " ")
+            row = title + "," + src0 + "," + src1 + "," + \
+                src2 + "," + src3 + "," + src4 + "\n"
 
             # Write to csv file
             csvFile = "SOLUTION/0-" + str(len(data)) + ".csv"
